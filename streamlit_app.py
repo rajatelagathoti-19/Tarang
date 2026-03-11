@@ -36,7 +36,7 @@ def show_study_materials():
 def show_video_lectures():
     st.title("Video Lectures")
     st.write("Scan the QR code to access video lectures:")
-    qr_url = "https://example.com/video-lectures"  # Replace with your URL
+    qr_url = "https://gate.nptel.ac.in/videosolutions.php?branchID=2&cid=2"  # Replace with your URL
     qr_img = qrcode.make(qr_url)
     img_bytes = io.BytesIO()
     qr_img.save(img_bytes, format='PNG')
