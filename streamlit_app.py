@@ -1,14 +1,16 @@
 import streamlit as st
 
-st.set_page_config(layout="wide")
+# Create columns for menu and content
+col1, col2 = st.columns([1, 4])
 
-# Sidebar
-with st.sidebar:
-    st.title("Menu")
-    st.button("Home")
-    st.button("About")
-    st.button("Resources")
+with col1:
+    st.write("Menu")
+    menu_option = st.radio("", ["ACADEMIC REGISTER", "ASSIGNMENTS REPORT", "EXAM-SCHEDULE"])
 
-# Main content
-st.title("Welcome to eCap")
-st.write("Announcements and notices here...")
+with col2:
+    if menu_option == "ACADEMIC REGISTER":
+        st.write("Academic Register content")
+    elif menu_option == "ASSIGNMENTS REPORT":
+        st.write("Assignments Report content")
+    elif menu_option == "EXAM-SCHEDULE":
+        st.write("Exam Schedule content")
