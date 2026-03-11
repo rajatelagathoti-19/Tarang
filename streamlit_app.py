@@ -1,4 +1,7 @@
 import streamlit as st
+import qrcode
+from PIL import Image
+import io
 
 # Initialize session state
 if 'page' not in st.session_state:
@@ -32,7 +35,12 @@ def show_study_materials():
 
 def show_video_lectures():
     st.title("Video Lectures")
-    st.write("This page is under construction.")
+    st.write("Scan the QR code to access video lectures:")
+    qr_url = "https://example.com/video-lectures"  # Replace with your URL
+    qr_img = qrcode.make(qr_url)
+    img_bytes = io.BytesIO()
+    qr_img.save(img_bytes, format='PNG')
+    st.image(img_bytes.getvalue(), width=200)
 
 if st.session_state.page == 'home':
     show_home()
