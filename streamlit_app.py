@@ -1,11 +1,15 @@
 import streamlit as st
-import qrcode
-from PIL import Image
-import io
 
-# Initialize session state
 if 'page' not in st.session_state:
     st.session_state.page = 'home'
+
+def go_back():
+    if st.session_state.page == 'options':
+        st.session_state.page = 'home'
+    elif st.session_state.page == 'study_materials':
+        st.session_state.page = 'options'
+    elif st.session_state.page == 'video_lectures':
+        st.session_state.page = 'options'
 
 def show_home():
     st.title("Study Portal")
@@ -32,32 +36,26 @@ def show_options():
 def show_study_materials():
     st.title("Study Materials")
     st.write("This page is under construction.")
+    if st.button("Back", key="back-button"):
+        go_back()
+        st.experimental_rerun()
 
 def show_video_lectures():
     st.title("Video Lectures")
     st.write("Scan the QR code to access video lectures:")
-    qr_url = "https://gate.nptel.ac.in/videosolutions.php?branchID=2&cid=2"  # Replace with your URL
-    qr_img = qrcode.make(qr_url)
-    img_bytes = io.BytesIO()
-    qr_img.save(img_bytes, format='PNG')
-    st.image(img_bytes.getvalue(), width=200)
+    # qr code logic here
+    if st.button("Back", key="back-button"):
+        go_back()
+        st.experimental_rerun()
 
 if st.session_state.page == 'home':
     show_home()
 elif st.session_state.page == 'options':
+    if st.button("Back", key="back-button"):
+        go_back()
+        st.experimental_rerun()
     show_options()
 elif st.session_state.page == 'study_materials':
     show_study_materials()
 elif st.session_state.page == 'video_lectures':
     show_video_lectures()
-
-def go_back():
-    if st.session_state.page == 'options':
-        st.session_state.page = 'home'
-    elif st.session_state.page == 'study_materials' or st.session_state.page == 'video_lectures':
-        st.session_state.page = 'options'
-
-# Add a back button in your Streamlit app
-if st.session_state.page != 'home':
-    if st.button("Back"):
-        go_back()
