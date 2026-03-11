@@ -1,17 +1,9 @@
 import streamlit as st
+import qrcode
+from PIL import Image
+import io
 
-if 'page' not in st.session_state:
-    st.session_state.page = 'home'
-
-def go_back():
-    if st.session_state.page == 'options':
-        st.session_state.page = 'home'
-    elif st.session_state.page == 'study_materials':
-        st.session_state.page = 'options'
-    elif st.session_state.page == 'video_lectures':
-        st.session_state.page = 'options'
-
-def show_home():
+def home():
     st.title("Study Portal")
     st.write("Please enter your details:")
     name = st.text_input("Name")
@@ -21,41 +13,43 @@ def show_home():
             st.session_state.name = name
             st.session_state.roll_number = roll_number
             st.session_state.page = 'options'
+            st.experimental_rerun()
         else:
             st.error("Please fill in all fields")
 
-def show_options():
+def options():
     st.title(f"Welcome, {st.session_state.name}!")
     st.write(f"Roll Number: {st.session_state.roll_number}")
     st.write("Choose an option:")
     if st.button("Study Materials"):
         st.session_state.page = 'study_materials'
+        st.experimental_rerun()
     if st.button("Video Lectures"):
         st.session_state.page = 'video_lectures'
+        st.experimental_rerun()
 
-def show_study_materials():
+def study_materials():
     st.title("Study Materials")
     st.write("This page is under construction.")
-    if st.button("Back", key="back-button"):
-        go_back()
+    if st.button("Back"):
+        st.session_state.page = 'options'
         st.experimental_rerun()
 
-def show_video_lectures():
+def video_lectures():
     st.title("Video Lectures")
     st.write("Scan the QR code to access video lectures:")
-    # qr code logic here
-    if st.button("Back", key="back-button"):
-        go_back()
+    if st.button("Back"):
+        st.session_state.page = 'options'
         st.experimental_rerun()
 
+if 'page' not in st.session_state:
+    st.session_state.page = 'home'
+
 if st.session_state.page == 'home':
-    show_home()
+    home()
 elif st.session_state.page == 'options':
-    if st.button("Back", key="back-button"):
-        go_back()
-        st.experimental_rerun()
-    show_options()
+    options()
 elif st.session_state.page == 'study_materials':
-    show_study_materials()
+    study_materials()
 elif st.session_state.page == 'video_lectures':
-    show_video_lectures()
+    video_lectures()
