@@ -50,3 +50,14 @@ elif st.session_state.page == 'study_materials':
     show_study_materials()
 elif st.session_state.page == 'video_lectures':
     show_video_lectures()
+
+def go_back():
+    if st.session_state.page == 'options':
+        st.session_state.page = 'home'
+    elif st.session_state.page == 'study_materials' or st.session_state.page == 'video_lectures':
+        st.session_state.page = 'options'
+
+# Add a back button in your Streamlit app
+if st.session_state.page != 'home':
+    if st.button("Back"):
+        go_back()
