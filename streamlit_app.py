@@ -1,12 +1,14 @@
 import streamlit as st
 
-st.title("My Project")
+st.set_page_config(layout="wide")
 
-with st.expander("Home"):
-    st.write("Welcome to my project!")
+# Sidebar
+with st.sidebar:
+    st.title("Menu")
+    st.button("Home")
+    st.button("About")
+    st.button("Resources")
 
-with st.expander("Study Materials"):
-    st.write("Materials here...")
-
-with st.expander("Video Lectures"):
-    st.write("Lectures here...")
+# Main content
+st.title("Welcome to eCap")
+st.write("Announcements and notices here...")
