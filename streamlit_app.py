@@ -4,7 +4,7 @@ import streamlit as st
 col1, col2 = st.columns([1, 4])
 
 with col1:
-    st.write("Menu")
+    st.title("Menu")
     menu_option = st.radio("", ["ACADEMIC REGISTER", "ASSIGNMENTS REPORT", "EXAM-SCHEDULE"])
 
 with col2:
