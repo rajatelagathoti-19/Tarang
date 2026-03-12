@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Create columns for menu and content
-col1, col2 = st.columns([1, 4])
+col1, col2 = st.columns([1, 5])
 
 with col1:
     st.write("Menu")
